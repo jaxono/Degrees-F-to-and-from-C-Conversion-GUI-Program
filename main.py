@@ -9,6 +9,7 @@ class Window:
 	def __init__(self, name):
 		self.border = tk.Tk()
 		self.border.title(name)
+		self.border.iconphoto(False, tk.PhotoImage(file="icon.png"))
 		self.frame = tk.Frame(self.border)
 		self.frame.pack()
 
