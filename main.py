@@ -52,9 +52,9 @@ def valid_float(var_in):
 	except IsBlank:
 		messagebox.showerror("Error", 'You have not entered anything into the entry box. Please click on the box above the "To °C" and "To °F" buttons and enter a number.')
 	except IsInfinite:
-		messagebox.showerror("Error", 'The number you entered is infinite, please enter a finite number eg. "4.5"')
+		messagebox.showerror("Error", 'The number you entered is infinite, please enter a finite number eg. "4.5".')
 	except IsNaN:
-		messagebox.showerror("Error", 'The number you entered is not a number, please enter a number eg. "4.5"')
+		messagebox.showerror("Error", 'The number you entered is not a number, please enter a number eg. "4.5".')
 	except Exception as exception:
 		messagebox.showerror("Error", 'Other or unknown error: "{}", "{}"'.format(type(exception).__name__, exception))
 	raise DoNotContinue
@@ -85,6 +85,9 @@ def main():
 		except IsBelowAbsoluteZero:
 			messagebox.showerror("Error", 'Value is below absolute zero. Please enter a number above absolute zero eg. "3".')
 
+	def help_window():
+		messagebox.showinfo("Help", """Enter a number into the text box above “To °C” and “To °F” then use:\n“To °C” to convert a fahrenheit temperature to a celsius temperature.\n“To °F” to convert a celsius temperature to a fahrenheit temperature.""")
+
 	main_window = Window("Unit Converter")  # Create Main Window
 
 	text_box_val = tk.StringVar()  # Holds text box value
@@ -95,6 +98,8 @@ def main():
 	to_c_button.grid(row=1, column=0)
 	to_f_button = tk.Button(main_window.frame, text="To °F", width=20, command=to_f)  # To °F button
 	to_f_button.grid(row=1, column=1)
+	help_button = tk.Button(main_window.frame, text="Help", width=20, command=help_window)  # To °F button
+	help_button.grid(row=2, column=0)
 
 	main_window.border.mainloop()  # Enter a loop to keep the window open until the the X button is pressed.
 
