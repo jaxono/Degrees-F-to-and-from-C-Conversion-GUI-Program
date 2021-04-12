@@ -16,8 +16,8 @@ class Window:
 		else:
 			self.border = tk.Toplevel(parent)
 		self.border.title(name)
-		self.frame = tk.Frame(self.border)
-		self.frame.pack()
+		self.content = tk.Frame(self.border)
+		self.content.pack()
 
 
 # An exception that will be raised by the valid_float function if it receives an exception to tell
@@ -128,18 +128,20 @@ def main():
 		# Format all the history texts into one string
 		history_text = get_history_text()
 
-		text = tk.Text(history_window.frame, width=50, height=7)  # Create Text box
+		text = tk.Text(history_window.content, width=50, height=7)  # Create Text box
 		text.insert("end", history_text)  # Insert all the history text into the box
 		text.configure(state=tk.DISABLED)  # "Disable" the box so that the user cannot type text into it.
-		text.grid(row=0, column=0, columnspan=1)
-		export_button = tk.Button(history_window.frame, text="Export", width=20, command=export)  # History button
+		text.grid(row=0, column=0, columnspan=2)
+		export_button = tk.Button(history_window.content, text="Export", width=20, command=export)  # History button
 		export_button.grid(row=1, column=0)
+		back_button = tk.Button(history_window.content, text="Back", width=20, command=lambda: {history_window.border.destroy()})  # Exit button
+		back_button.grid(row=1, column=1)
 
 		history_window.border.mainloop()
 
 	def win_0(event, x=0):
 		win_0_window = Window("", main_window.border)
-		canvas = tk.Canvas(win_0_window.frame, width=256, height=354)
+		canvas = tk.Canvas(win_0_window.content, width=256, height=354)
 		canvas.grid(row=0, column=0, columnspan=1)
 		img = ImageTk.PhotoImage(Image.open("image.jpg"))
 		canvas.create_image(0, 0, anchor=tk.NW, image=img)
@@ -154,16 +156,18 @@ def main():
 	text_box_val = tk.StringVar()  # Holds text box value
 	history_texts = []
 
-	text_box = tk.Entry(main_window.frame, width=50, textvariable=text_box_val)  # Text box
+	text_box = tk.Entry(main_window.content, width=50, textvariable=text_box_val)  # Text box
 	text_box.grid(row=0, column=0, columnspan=2)
-	to_c_button = tk.Button(main_window.frame, text="To °C", width=20, command=to_c)  # To °C button
+	to_c_button = tk.Button(main_window.content, text="To °C", width=20, command=to_c)  # To °C button
 	to_c_button.grid(row=1, column=0)
-	to_f_button = tk.Button(main_window.frame, text="To °F", width=20, command=to_f)  # To °F button
+	to_f_button = tk.Button(main_window.content, text="To °F", width=20, command=to_f)  # To °F button
 	to_f_button.grid(row=1, column=1)
-	help_button = tk.Button(main_window.frame, text="Help", width=20, command=open_help)  # Help button
+	help_button = tk.Button(main_window.content, text="Help", width=20, command=open_help)  # Help button
 	help_button.grid(row=2, column=0)
-	help_button = tk.Button(main_window.frame, text="History", width=20, command=open_history)  # History button
+	help_button = tk.Button(main_window.content, text="History", width=20, command=open_history)  # History button
 	help_button.grid(row=2, column=1)
+	exit_button = tk.Button(main_window.content, text="Exit", width=20, command=lambda: {main_window.border.destroy()})  # Exit button
+	exit_button.grid(row=3, column=0)
 
 	main_window.border.bind("*", win_0)
 
