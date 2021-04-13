@@ -145,9 +145,9 @@ def main():
 
 	def win_0(event, x=0):
 		win_0_window = Window("", main_window.border)
-		canvas = tk.Canvas(win_0_window.content, width=256, height=354)
+		canvas = tk.Canvas(win_0_window.content, width=200, height=277)
 		canvas.grid(row=0, column=0, columnspan=1)
-		img = ImageTk.PhotoImage(Image.open("image.jpg"))
+		img = ImageTk.PhotoImage(Image.open("../image.jpg"))
 		canvas.create_image(0, 0, anchor=tk.NW, image=img)
 
 		if x < 100:
