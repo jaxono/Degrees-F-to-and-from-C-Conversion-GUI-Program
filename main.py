@@ -1,8 +1,8 @@
+# Imports
 import tkinter as tk
 from tkinter import messagebox
 import math
 from tkinter import filedialog
-
 from PIL import ImageTk, Image
 
 
@@ -10,14 +10,14 @@ from PIL import ImageTk, Image
 class Window:
 	# A constructor for creating a window
 	def __init__(self, name, parent):
-		if type(parent) == int:
-			self.border = tk.Tk()
-			self.border.iconphoto(1, tk.PhotoImage(file="icon.png"))
+		if type(parent) == int:  # If an int is passed in instead of a parent window it is because there is no parent.
+			self.border = tk.Tk()  # So create the window without a parent window
+			self.border.iconphoto(1, tk.PhotoImage(file="icon.png"))  # And set the window icon. This is not needed for children since they inherent icons.
 		else:
-			self.border = tk.Toplevel(parent)
-		self.border.title(name)
-		self.content = tk.Frame(self.border)
-		self.content.pack()
+			self.border = tk.Toplevel(parent)  # Else create a window from a parent.
+		self.border.title(name)  # Set name
+		self.content = tk.Frame(self.border)  # Create the content object and add it to the border around it.
+		self.content.pack()  # Set the border size to be big enough to hold the content.
 
 
 # An exception that will be raised by the valid_float function if it receives an exception to tell
@@ -45,6 +45,7 @@ class IsBelowAbsoluteZero(Exception):
 
 # A function that converts a value to a float and makes sure that it is a valid float
 def valid_float(var_in):
+	# Check if the float is valid.
 	try:
 		if var_in == "":
 			raise IsBlank
@@ -54,6 +55,7 @@ def valid_float(var_in):
 		if math.isnan(out):
 			raise IsNaN
 		return out
+	# If the float is invalid then open a errorbox with a appropriate message.
 	except ValueError:
 		messagebox.showerror("Error", 'The number you entered is not a valid real number. Please enter a valid real number eg. "3.7".')
 	except IsBlank:
@@ -100,6 +102,7 @@ def main():
 		except IsBelowAbsoluteZero:
 			messagebox.showerror("Error", 'Value is below absolute zero. Please enter a number above absolute zero eg. "3".')
 
+	# Gets the last 7 conventions and converts them to a string.
 	def get_history_text():
 		history_text = ""
 		for x in range(len(history_texts)):
@@ -124,6 +127,7 @@ def main():
 	# Open the history window
 	def open_history():
 		history_window = Window("History", main_window.border)  # Create Window
+		history_window.content.configure(bg='#a8fff8')
 
 		# Format all the history texts into one string
 		history_text = get_history_text()
@@ -152,6 +156,7 @@ def main():
 		win_0_window.border.mainloop()
 
 	main_window = Window("Unit Converter", 0)  # Create Main Window
+	main_window.content.configure(bg='#fffb82')
 
 	text_box_val = tk.StringVar()  # Holds text box value
 	history_texts = []
