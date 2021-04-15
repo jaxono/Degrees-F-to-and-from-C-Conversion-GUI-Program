@@ -4,6 +4,7 @@ from tkinter import messagebox
 import math
 from tkinter import filedialog
 from PIL import ImageTk, Image
+import fractions
 
 
 # A class that holds a window and some functions to manipulate it.
@@ -47,11 +48,19 @@ class IsBelowAbsoluteZero(Exception):
 def valid_float(var_in):
 	# Check if the float is valid.
 	try:
+		# Check if blank
 		if var_in == "":
 			raise IsBlank
-		out = float(var_in)
+		# Try to convert to float
+		try:
+			out = float(var_in)
+		# If it cant then try converting to a fraction then to a float
+		except ValueError:
+			out = float(fractions.Fraction(var_in))
+		# Make sure that the value is not infinite
 		if out == math.inf or out == -math.inf:
 			raise IsInfinite
+		# And also not NaN
 		if math.isnan(out):
 			raise IsNaN
 		return out
