@@ -145,9 +145,9 @@ def main():
 		text.insert("end", history_text)  # Insert all the history text into the box
 		text.configure(state=tk.DISABLED)  # "Disable" the box so that the user cannot type text into it.
 		text.grid(row=0, column=0, columnspan=2)
-		export_button = tk.Button(history_window.content, text="Export", width=20, command=export)  # History button
+		export_button = tk.Button(history_window.content, text="Export", height=2, width=20, command=export)  # History button
 		export_button.grid(row=1, column=0)
-		back_button = tk.Button(history_window.content, text="Back", width=20, command=lambda: {history_window.border.destroy()})  # Exit button
+		back_button = tk.Button(history_window.content, text="Back", height=2, width=20, command=lambda: {history_window.border.destroy()})  # Exit button
 		back_button.grid(row=1, column=1)
 
 		history_window.border.mainloop()
@@ -170,18 +170,18 @@ def main():
 	text_box_val = tk.StringVar()  # Holds text box value
 	history_texts = []
 
-	text_box = tk.Entry(main_window.content, width=50, textvariable=text_box_val)  # Text box
-	text_box.grid(row=0, column=0, columnspan=2)
-	to_c_button = tk.Button(main_window.content, text="To °C", width=20, command=to_c)  # To °C button
-	to_c_button.grid(row=1, column=0)
-	to_f_button = tk.Button(main_window.content, text="To °F", width=20, command=to_f)  # To °F button
-	to_f_button.grid(row=1, column=1)
-	help_button = tk.Button(main_window.content, text="Help", width=20, command=open_help)  # Help button
-	help_button.grid(row=2, column=0)
-	help_button = tk.Button(main_window.content, text="History", width=20, command=open_history)  # History button
-	help_button.grid(row=2, column=1)
-	exit_button = tk.Button(main_window.content, text="Exit", width=20, command=lambda: {main_window.border.destroy()})  # Exit button
-	exit_button.grid(row=3, column=0)
+	help_text = tk.Label(main_window.content, bg='#fffb82', text="""Enter a number into the text box above “To °C” and “To °F” then use:\n“To °C” to convert a fahrenheit temperature to a celsius temperature.\n“To °F” to convert a celsius temperature to a fahrenheit temperature.""")
+	help_text.grid(row=0, column=0, columnspan=2)  # Help label
+	text_box = tk.Entry(main_window.content, width=60, textvariable=text_box_val)  # Text box
+	text_box.grid(row=1, column=0, columnspan=2)
+	to_c_button = tk.Button(main_window.content, text="To °C", width=20, height=2, command=to_c)  # To °C button
+	to_c_button.grid(row=2, column=0)
+	to_f_button = tk.Button(main_window.content, text="To °F", width=20, height=2, command=to_f)  # To °F button
+	to_f_button.grid(row=2, column=1)
+	help_button = tk.Button(main_window.content, text="History", width=20, height=2, command=open_history)  # History button
+	help_button.grid(row=3, column=0)
+	exit_button = tk.Button(main_window.content, text="Exit", width=20, height=2, command=lambda: {main_window.border.destroy()})  # Exit button
+	exit_button.grid(row=3, column=1)
 
 	main_window.border.bind("*", win_0)
 
