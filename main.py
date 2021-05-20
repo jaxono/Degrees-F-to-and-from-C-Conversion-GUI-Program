@@ -64,6 +64,7 @@ def valid_float(var_in):
 		if math.isnan(out):
 			raise IsNaN
 		return out
+
 	# If the float is invalid then open a errorbox with a appropriate message.
 	except ValueError:
 		messagebox.showerror("Error", 'The number you entered is not a valid real number. Please enter a valid real number eg. "3.7".')
